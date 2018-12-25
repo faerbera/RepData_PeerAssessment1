@@ -1,0 +1,716 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Reproducible Research: Peer Assessment 1},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Reproducible Research: Peer Assessment 1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{introduction}
+
+This analysis analyzes FitBit step tracking data to evaluate different
+activity patterns for the FitBit wearer on weekends and weekdays.
+
+The research question is, ``Are there differences in steps between
+weekends and weekdays?''
+
+The analysis will follow this outline:\\
+- Analyze the mean total number of steps taken per day.\\
+- Analyze the average daily activity pattern.\\
+- Analyze different activity patterns between weekdays and weekends.
+
+But first, let us setup the data
+
+\subsection{Loading and preprocessing the
+data}\label{loading-and-preprocessing-the-data}
+
+First, I set a common size for figures.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{fig.width=}\DecValTok{5}\NormalTok{, }\DataTypeTok{fig.height=}\DecValTok{3}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Second, I make library calls.
+
+\begin{verbatim}
+## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.1.0     v purrr   0.2.5
+## v tibble  1.4.2     v dplyr   0.7.7
+## v tidyr   0.8.2     v stringr 1.3.1
+## v readr   1.1.1     v forcats 0.3.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ----------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     date
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'mice'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     complete
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     cbind, rbind
+\end{verbatim}
+
+Third, I unzip and import the dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Unzip file, if not already unzipped }
+\NormalTok{filePath <-}\StringTok{ "./activity.zip"}
+
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{file.exists}\NormalTok{(}\StringTok{"./activity.csv"}\NormalTok{))\{}
+\NormalTok{  local_file <-}\StringTok{ }\KeywordTok{unzip}\NormalTok{(}\StringTok{"./activity.zip"}\NormalTok{, }\DataTypeTok{exdir=}\StringTok{"./"}\NormalTok{, }\DataTypeTok{unzip =} \StringTok{"internal"}\NormalTok{)}
+\NormalTok{  path <-}\StringTok{ }\NormalTok{(local_file)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{message}\NormalTok{(}\StringTok{"File already downloaded"}\NormalTok{)}
+\NormalTok{  local_file <-}\StringTok{ "./activity.csv"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## File already downloaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Import CSV}
+\NormalTok{fitbit <-}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read_csv}\NormalTok{(local_file, }\DataTypeTok{col_types =} \StringTok{"iDi"}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+The structure of the imported data set is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(fitbit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Date, format: "2012-10-01" "2012-10-01" ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+##  - attr(*, "spec")=List of 2
+##   ..$ cols   :List of 3
+##   .. ..$ steps   : list()
+##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+##   .. ..$ date    :List of 1
+##   .. .. ..$ format: chr ""
+##   .. .. ..- attr(*, "class")= chr  "collector_date" "collector"
+##   .. ..$ interval: list()
+##   .. .. ..- attr(*, "class")= chr  "collector_integer" "collector"
+##   ..$ default: list()
+##   .. ..- attr(*, "class")= chr  "collector_guess" "collector"
+##   ..- attr(*, "class")= chr "col_spec"
+\end{verbatim}
+
+This data is unusable for dates and times in timeseries operators.
+Interval is 0 = 00:00 to 00:05, 5 = 00:06 - 00:10, 10 = 00:11 -
+00:15\ldots{} 55 = 00:55-01:00, 100 = 01:01 - 01:05. I will generate a
+datetime using the start of the interval as the datetime.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#the paste0 turns this into a string to feed into ymd_hm}
+\CommentTok{#formatC is the same as printF and turns 0 into 0000 and 2355 into 2355}
+\NormalTok{fitbit <-}\StringTok{ }\NormalTok{fitbit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{datetime =} \KeywordTok{ymd_hm}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\KeywordTok{as.character.Date}\NormalTok{(date),}\KeywordTok{formatC}\NormalTok{(interval, }\DataTypeTok{width =} \DecValTok{4}\NormalTok{, }\DataTypeTok{format =} \StringTok{"d"}\NormalTok{, }\DataTypeTok{flag =} \StringTok{"0"}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{observations <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(fitbit)[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+There are 17568 observations in the dataset.
+
+The dataset has four variables,\\
+- \emph{steps}: Number of steps taking in a 5-minute interval (missing
+values are coded as NA)\\
+- \emph{date}: The date on which the measurement was taken in YYYY-MM-DD
+format\\
+- \emph{interval}: Identifier for the 5-minute interval in which
+measurement was taken\\
+- \emph{datetime}: The date and time of the END of the 5-minute interval
+for meaasuring steps.
+
+\subsection{What is mean total number of steps taken per
+day?}\label{what-is-mean-total-number-of-steps-taken-per-day}
+
+First, I calculate the total number of steps taken ove each day
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{daysteps <-}\StringTok{ }\NormalTok{fitbit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(}\KeywordTok{date}\NormalTok{(datetime)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{sumSteps =} \KeywordTok{sum}\NormalTok{(steps))}
+\end{Highlighting}
+\end{Shaded}
+
+Next, I plot a histogram of the frequency of total steps per day.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ daysteps, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sumSteps))}\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{2000}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily Step Count"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Steps per day"}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 8 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics{PA1_template_files/figure-latex/dailyStepsHistogram-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meanSteps <-}\StringTok{  }\KeywordTok{mean}\NormalTok{(daysteps}\OperatorTok{$}\NormalTok{sumSteps, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{medianSteps <-}\StringTok{ }\KeywordTok{median}\NormalTok{(daysteps}\OperatorTok{$}\NormalTok{sumSteps, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Results} The median number of daily steps is 10765 and the mean
+number of steps is 1.0766189\times 10\^{}\{4\}.
+
+\subsection{What is the average daily activity
+pattern?}\label{what-is-the-average-daily-activity-pattern}
+
+I will calculate the average daily step count and summarize the results
+in a time series plot.
+
+The analytic trick to being able to aggregate across all days AND to get
+the resulting charts to print with nice descriptive labels, is to change
+all of the dates to have the same date and month using the update
+function. See
+\url{https://stackoverflow.com/questions/9839343/extracting-time-from-posixct}
+for more details.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{timesteps <-}\StringTok{ }\NormalTok{fitbit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\CommentTok{#The update function allows me to set the days all the same}
+\StringTok{      }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{datetime =} \KeywordTok{update}\NormalTok{(datetime, }\DataTypeTok{month =} \DecValTok{10}\NormalTok{, }\DataTypeTok{day =} \DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{group_by}\NormalTok{(datetime) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{avgSteps =} \KeywordTok{mean}\NormalTok{(steps, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Next, I create a line plot for the average steps in each 5-minute
+interval of the day.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ timesteps) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ datetime, }\DataTypeTok{y =}\NormalTok{ avgSteps)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Average Steps across the day"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Time of day"}\NormalTok{, }
+       \DataTypeTok{y =} \StringTok{"Average steps"}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PA1_template_files/figure-latex/plotts-1.pdf}
+
+\subsubsection{2. Which 5-minute interval, on average across all the
+days in the dataset, contains the maximum number of
+steps?}\label{which-5-minute-interval-on-average-across-all-the-days-in-the-dataset-contains-the-maximum-number-of-steps}
+
+I create a table of the 10 time intervals with the most steps.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{timesteps <-}\StringTok{ }\NormalTok{timesteps }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(avgSteps)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{datetime =} \KeywordTok{as.character.Date}\NormalTok{(datetime))}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{xtable}\NormalTok{(timesteps[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,]), }\DataTypeTok{type =} \StringTok{"html"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+datetime
+
+avgSteps
+
+1
+
+2012-10-01 08:35:00
+
+206.17
+
+2
+
+2012-10-01 08:40:00
+
+195.92
+
+3
+
+2012-10-01 08:50:00
+
+183.40
+
+4
+
+2012-10-01 08:45:00
+
+179.57
+
+5
+
+2012-10-01 08:30:00
+
+177.30
+
+6
+
+2012-10-01 08:20:00
+
+171.15
+
+7
+
+2012-10-01 08:55:00
+
+167.02
+
+8
+
+2012-10-01 08:15:00
+
+157.53
+
+9
+
+2012-10-01 08:25:00
+
+155.40
+
+10
+
+2012-10-01 09:00:00
+
+143.45
+
+\textbf{Results}: From the table above, we can see that the top times of
+the day for total steps per 5-minute interval are between 8:15 and
+8:55am. The peak time is 2012-10-01 08:35:00 where 206.1698113 steps
+were taken.
+
+\subsection{Imputing missing values}\label{imputing-missing-values}
+
+\subsubsection{1. Calculate and report the total number of missing
+values in the dataset (i.e.~the total number of rows with
+NAs)}\label{calculate-and-report-the-total-number-of-missing-values-in-the-dataset-i.e.the-total-number-of-rows-with-nas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(fitbit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      steps             date               interval     
+##  Min.   :  0.00   Min.   :2012-10-01   Min.   :   0.0  
+##  1st Qu.:  0.00   1st Qu.:2012-10-16   1st Qu.: 588.8  
+##  Median :  0.00   Median :2012-10-31   Median :1177.5  
+##  Mean   : 37.38   Mean   :2012-10-31   Mean   :1177.5  
+##  3rd Qu.: 12.00   3rd Qu.:2012-11-15   3rd Qu.:1766.2  
+##  Max.   :806.00   Max.   :2012-11-30   Max.   :2355.0  
+##  NA's   :2304                                          
+##     datetime                  
+##  Min.   :2012-10-01 00:00:00  
+##  1st Qu.:2012-10-16 05:58:45  
+##  Median :2012-10-31 11:57:30  
+##  Mean   :2012-10-31 11:57:30  
+##  3rd Qu.:2012-11-15 17:56:15  
+##  Max.   :2012-11-30 23:55:00  
+## 
+\end{verbatim}
+
+\textbf{Results} This table shows that there are no missing dates or
+intervals, but there are 2304 observations for steps that are missing.
+
+Next, I load the MICE package (Multiple Imputation for Chained
+Equations) and visually identify the patterns of missing variables in
+the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(mice)}
+\KeywordTok{md.pattern}\NormalTok{(fitbit)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PA1_template_files/figure-latex/librarymicepatterns-1.pdf}
+
+\begin{verbatim}
+##       date interval datetime steps     
+## 15264    1        1        1     1    0
+## 2304     1        1        1     0    1
+##          0        0        0  2304 2304
+\end{verbatim}
+
+\textbf{Results} The blue and red squares are showing patterns of
+missing variables. Red means there are missing variables (0 = not
+missing, 1 = missing). So again, this confirms visually there are 2304
+observations missing for steps variable.
+
+\subsubsection{2. My strategy for filling in all of the missing values
+in the
+dataset.}\label{my-strategy-for-filling-in-all-of-the-missing-values-in-the-dataset.}
+
+I have enough observations in order to use advanced statistical modeling
+for multiple imputation using a predictive mean matching algorithm
+available in the MICE package.
+
+\emph{I don't have a PhD in outcomes research to NOT use sophisticated
+statistics for imputation. I mean, this is what I do\ldots{} }
+
+\subsubsection{3. Create a new dataset that is equal to the original
+dataset but with the missing data filled
+in.}\label{create-a-new-dataset-that-is-equal-to-the-original-dataset-but-with-the-missing-data-filled-in.}
+
+The MICE package has the ability to conduct mulitple imputation and
+complex analyses of imputed datasets. However, for this, I will just
+pick one of the imputed iterations to use as the new dataset. Typically,
+I would use the multiple imputed datasets to conduct the same
+statistical model, then pool the results. That is definitely too
+complicated for this data.
+
+mice() parameters:\\
+- m -- Refers to 5 imputed data sets\\
+- maxit -- Refers to no. of iterations taken to impute missing values\\
+- method -- Refers to method used in imputation. we used predictive mean
+matching.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#impute missing step values using predictive mean matching}
+\NormalTok{imputation <-}\StringTok{ }\KeywordTok{mice}\NormalTok{(fitbit, }\DataTypeTok{m=}\DecValTok{5}\NormalTok{, }\DataTypeTok{maxit =} \DecValTok{50}\NormalTok{, }\DataTypeTok{method =} \StringTok{'pmm'}\NormalTok{, }\DataTypeTok{seed =} \DecValTok{500}\NormalTok{, }\DataTypeTok{printFlag =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Number of logged events: 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#set the valuse from set 5 as the new values for steps in the imputed dataset}
+\NormalTok{imp_fitbit <-}\StringTok{ }\KeywordTok{complete}\NormalTok{(imputation, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+I now have an imputed dataset with no missing values. imp\_fitbit
+
+\subsubsection{4a. Make a histogram of the total number of steps taken
+each
+day}\label{a.-make-a-histogram-of-the-total-number-of-steps-taken-each-day}
+
+I will recalculate the total daily steps, using the imputed data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_fitbit_steps <-}\StringTok{ }\NormalTok{imp_fitbit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(}\KeywordTok{date}\NormalTok{(datetime)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{sumSteps =} \KeywordTok{sum}\NormalTok{(steps))}
+\end{Highlighting}
+\end{Shaded}
+
+And then plot a histogram of the imputed data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ imp_fitbit_steps, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sumSteps))}\OperatorTok{+}
+\StringTok{      }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth =} \DecValTok{2000}\NormalTok{) }\OperatorTok{+}
+\StringTok{      }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily Step Count (imputed data)"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Steps per day"}\NormalTok{)  }\OperatorTok{+}
+\StringTok{      }\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PA1_template_files/figure-latex/dailyStepsHistogramImputed-1.pdf}
+
+\subsubsection{4b. Calculate and report the mean and median total number
+of steps taken per
+day.}\label{b.-calculate-and-report-the-mean-and-median-total-number-of-steps-taken-per-day.}
+
+I will calculate the mean and median, using the method above, then
+compare the results in a simple table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meanStepsI <-}\StringTok{  }\KeywordTok{mean}\NormalTok{(imp_fitbit_steps}\OperatorTok{$}\NormalTok{sumSteps, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{medianStepsI <-}\StringTok{ }\KeywordTok{median}\NormalTok{(imp_fitbit_steps}\OperatorTok{$}\NormalTok{sumSteps, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lcc@{}}
+\toprule
+Statistic & Before Imputation & After Imputation\tabularnewline
+\midrule
+\endhead
+Mean & 1.0766189\times 10\^{}\{4\} &
+1.0883967\times 10\^{}\{4\}\tabularnewline
+Median & 10765 & 11015\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{Results:} The effect of imputing missing data on the estimates
+of the total daily number of steps is to raise the mean and median
+number of daily steps. Also, because the mean and median are both
+similar in these two datasets, the imputation did not change the skew or
+kurtosis of the data.
+
+\subsection{Are there differences in activity patterns between weekdays
+and
+weekends?}\label{are-there-differences-in-activity-patterns-between-weekdays-and-weekends}
+
+I will answer the primary research question by analyzing data for
+activity on weekends and weekdays.
+
+\subsubsection{\texorpdfstring{1. Create a new factor variable in the
+dataset with two levels -- ``weekday'' and ``weekend'' indicating
+whether a given date is a weekday or weekend
+day.}{1. Create a new factor variable in the dataset with two levels -- weekday and weekend indicating whether a given date is a weekday or weekend day.}}\label{create-a-new-factor-variable-in-the-dataset-with-two-levels-weekday-and-weekend-indicating-whether-a-given-date-is-a-weekday-or-weekend-day.}
+
+Note that the wday() function in lubridate uses the lubridate.week.start
+global parameter to determine the mapping of days of the week
+``SUnday'',``Monday'', etc to integers 1, 2, 3\ldots{} So weekends are 1
+(Sunday) and 7 (Saturday).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_fitbit <-}\StringTok{ }\NormalTok{imp_fitbit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{weekend =} \KeywordTok{case_when}\NormalTok{(}
+    \KeywordTok{wday}\NormalTok{(datetime) }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{) }\OperatorTok{~}\StringTok{ "Weekend"}\NormalTok{, }
+    \KeywordTok{wday}\NormalTok{(datetime) }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{) }\OperatorTok{~}\StringTok{ "Weekday"}\NormalTok{ ))}
+\end{Highlighting}
+\end{Shaded}
+
+Then check the coding of this new variable with a quick table of days of
+the week and the weekend flag.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(}\KeywordTok{wday}\NormalTok{(imp_fitbit}\OperatorTok{$}\NormalTok{datetime, }\DataTypeTok{label =} \OtherTok{TRUE}\NormalTok{), imp_fitbit}\OperatorTok{$}\NormalTok{weekend)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      
+##       Weekday Weekend
+##   Sun       0    2304
+##   Mon    2592       0
+##   Tue    2592       0
+##   Wed    2592       0
+##   Thu    2592       0
+##   Fri    2592       0
+##   Sat       0    2304
+\end{verbatim}
+
+\subsubsection{\texorpdfstring{2. Make a panel plot containing a time
+series plot (i.e.~type=``l'') of the 5-minute interval (x-axis) and the
+average number of steps taken, averaged across all weekday days or
+weekend days
+(y-axis).}{2. Make a panel plot containing a time series plot (i.e.~type=l) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).}}\label{make-a-panel-plot-containing-a-time-series-plot-i.e.typel-of-the-5-minute-interval-x-axis-and-the-average-number-of-steps-taken-averaged-across-all-weekday-days-or-weekend-days-y-axis.}
+
+The instructions were not explicit, but I am using the imputed dataset
+for these analyzes.
+
+First, I need to recalculate the average steps for each 5 minute
+interval for weekdays and weekends.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp_fitbit_avgday <-}\StringTok{ }\NormalTok{imp_fitbit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\CommentTok{#According to https://stackoverflow.com/questions/9839343/extracting-time-from-posixct}
+\StringTok{      }\CommentTok{#The best way to calculate across days is to set the days all the same}
+\StringTok{      }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{datetime =} \KeywordTok{update}\NormalTok{(datetime, }\DataTypeTok{month =} \DecValTok{10}\NormalTok{, }\DataTypeTok{day =} \DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{group_by}\NormalTok{(weekend, datetime) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{avgSteps =} \KeywordTok{mean}\NormalTok{(steps, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Next, I plot a 2-panel plot comparing steps per 5-minute interval for
+weekends and weekdays.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ imp_fitbit_avgday, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ datetime, }\DataTypeTok{y =}\NormalTok{ avgSteps, }\DataTypeTok{col =}\NormalTok{ weekend)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ datetime, }\DataTypeTok{y =}\NormalTok{ avgSteps), }\DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(weekend}\OperatorTok{~}\NormalTok{.) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Average Steps per 5 minutes across the day"}\NormalTok{,}
+       \DataTypeTok{subtitle =} \StringTok{"Comparing Weekends versus Weekdays"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Time of day"}\NormalTok{, }
+       \DataTypeTok{y =} \StringTok{"Average steps"}\NormalTok{)  }\OperatorTok{+}
+\StringTok{      }\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PA1_template_files/figure-latex/plot imputed weekdayweekend steps-1.pdf}
+
+\textbf{Results}: In summary, the pattern observed above shows there is
+a difference in steps per 5-minute increment between weekdays and
+weekends. Activity begins earlier on weekdays, around 6am, but on
+weekends begins later, closer to 7am. Activity discontinues earlier on
+weekdays, around 7pm, but on weekends, continues until 9pm. There is a
+weekday pattern of high step activity just before 9am that is not as
+strongly observed on weekends.
+
+
+\end{document}
